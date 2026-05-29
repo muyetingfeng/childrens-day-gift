@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎈 六一儿童节快乐！</title>
+<style>
+/* ══════════════════════════════════════════
+   RESET & BASE
+   ══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 25%, #a18cd1 50%, #fbc2eb 75%, #ffecd2 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  overflow-x: hidden;
+  cursor: default;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ══════════════════════════════════════════
+   STORY OVERLAY
+   ══════════════════════════════════════════ */
+.story-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #0d0d1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.7s, visibility 0.7s;
+}
+.story-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.story-container {
+  width: 100%;
+  max-width: 440px;
+  height: 100vh;
+  height: 100dvh;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #1a1a35 0%, #1e1e3a 100%);
+}
+
+/* Story Scene */
+.story-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 24px 40px;
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+.story-scene.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Scene visuals area */
+.scene-visual {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Scene 1: Early Morning Alarm */
+.scene-visual.scene1 .room {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #0a0a1a 0%, #1a1a35 60%, #2a2a45 100%);
+}
+.scene-visual.scene1 .window {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 100px;
+  background: linear-gradient(180deg, #1a2a4a, #2a3a5a);
+  border-radius: 12px;
+  border: 4px solid #3a3a55;
+  overflow: hidden;
+}
+.scene-visual.scene1 .window::after {
+  content: '🌙';
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 1.8rem;
+  opacity: 0.6;
+}
+.scene-visual.scene1 .bed {
+  position: absolute;
+  bottom: 35%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 6rem;
+}
+.scene-visual.scene1 .alarm {
+  position: absolute;
+  bottom: 52%;
+  right: 22%;
+  font-size: 2rem;
+  animation: alarmShake 0.3s ease-in-out infinite;
+}
+@keyframes alarmShake {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-15deg); }
+  75% { transform: rotate(15deg); }
+}
+.scene-visual.scene1 .clock-text {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ff6b6b;
+  font-weight: 900;
+  font-size: 1.6rem;
+  letter-spacing: 3px;
+  animation: blink 1s ease-in-out infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Scene 2: Classroom */
+.scene-visual.scene2 .classroom {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #f5f0e0 0%, #e8dcc8 60%, #d5c8b0 100%);
+}
+.scene-visual.scene2 .blackboard {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 35%;
+  background: #2d5016;
+  border-radius: 6px;
+  border: 6px solid #8b7355;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.scene-visual.scene2 .blackboard-text {
+  color: rgba(255,255,255,0.5);
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  line-height: 1.8;
+  text-align: center;
+}
+.scene-visual.scene2 .desk-row {
+  position: absolute;
+  bottom: 45%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+}
+.scene-visual.scene2 .desk { font-size: 2.5rem; }
+.scene-visual.scene2 .student {
+  position: absolute;
+  bottom: 55%;
+  left: 38%;
+  font-size: 3.5rem;
+  animation: headNod 3s ease-in-out infinite;
+}
+@keyframes headNod {
+  0%, 100% { transform: rotate(0); }
+  30% { transform: rotate(8deg); }
+  40% { transform: rotate(8deg); }
+  70% { transform: rotate(-5deg); }
+  80% { transform: rotate(8deg); }
+}
+.scene-visual.scene2 .zzz {
+  position: absolute;
+  top: 25%;
+  right: 25%;
+  font-size: 1.2rem;
+  color: #888;
+  animation: zzzFloat 2s ease-in-out infinite;
+}
+@keyframes zzzFloat {
+  0% { transform: translateY(0); opacity: 0.3; }
+  50% { transform: translateY(-20px); opacity: 1; }
+  100% { transform: translateY(-40px); opacity: 0; }
+}
+
+/* Scene 3: Dream transition */
+.scene-visual.scene3 .dream-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #1a1a35 0%, #2d1b69 30%, #6c2d82 60%, #c44d9e 100%);
+}
+.scene-visual.scene3 .swirl {
+  position: absolute;
+  font-size: 2rem;
+  animation: swirlFloat 3s ease-in-out infinite;
+  opacity: 0.6;
+}
+@keyframes swirlFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-30px) rotate(90deg); }
+  50% { transform: translateY(-10px) rotate(180deg); }
+  75% { transform: translateY(-40px) rotate(270deg); }
+}
+
+/* Scene 4: Mysterious Gift Shop */
+.scene-visual.scene4 .shop-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #1a0a2e 0%, #2d1b4e 40%, #4a2c6e 70%, #1a0a2e 100%);
+}
+.scene-visual.scene4 .shop-door {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 7rem;
+  filter: drop-shadow(0 0 30px rgba(255,215,0,0.4));
+}
+.scene-visual.scene4 .shop-sign {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffd700;
+  font-weight: 900;
+  font-size: 1.2rem;
+  text-shadow: 0 0 20px rgba(255,215,0,0.6);
+  letter-spacing: 3px;
+}
+.scene-visual.scene4 .sparkle-shop {
+  position: absolute;
+  font-size: 1.2rem;
+  animation: sparkleFloat 2s ease-in-out infinite;
+}
+@keyframes sparkleFloat {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+.scene-visual.scene4 .mystery-figure {
+  position: absolute;
+  bottom: 22%;
+  left: 25%;
+  font-size: 4rem;
+  animation: figureFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(200,180,255,0.5));
+}
+@keyframes figureFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* Scene 5: Invitation */
+.scene-visual.scene5 .shop-bg2 {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, #3d1f6e 0%, #1a0a2e 70%);
+}
+.scene-visual.scene5 .gift-glow {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 8rem;
+  animation: giftGlow 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 40px rgba(255,200,50,0.6));
+}
+@keyframes giftGlow {
+  0%, 100% { transform: translateX(-50%) scale(1); filter: drop-shadow(0 0 30px rgba(255,200,50,0.5)); }
+  50% { transform: translateX(-50%) scale(1.08); filter: drop-shadow(0 0 50px rgba(255,200,50,0.8)); }
+}
+
+/* Story Bubble */
+.story-bubble {
+  position: relative;
+  z-index: 10;
+  background: rgba(255,255,255,0.95);
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  max-width: 340px;
+  width: 100%;
+}
+.story-bubble .bubble-emoji {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 6px;
+}
+.story-bubble .bubble-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.8;
+}
+
+/* Story Dots */
+.story-dots {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 20;
+}
+.story-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  transition: all 0.3s;
+}
+.story-dot.active { background: #ffd700; width: 24px; border-radius: 4px; }
+
+/* Story Enter Button */
+.story-enter-btn {
+  z-index: 10;
+  padding: 14px 40px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+  background-size: 300% 300%;
+  animation: btnGlow 3s ease infinite;
+  color: #fff;
+  letter-spacing: 2px;
+  box-shadow: 0 8px 30px rgba(255,107,107,0.4);
+  font-family: inherit;
+  margin-bottom: 8px;
+}
+@keyframes btnGlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.story-enter-btn:hover { transform: scale(1.06); }
+.story-enter-btn:active { transform: scale(0.95); }
+
+/* Story Back Button */
+.story-back-btn {
+  position: absolute; top: 12px; left: 14px;
+  z-index: 25;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.7);
+  width: 34px; height: 34px; border-radius: 50%;
+  font-size: 0.9rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  font-family: inherit;
+  visibility: hidden;
+}
+.story-back-btn.visible { visibility: visible; }
+.story-back-btn:hover { background: rgba(255,255,255,0.25); color: #fff; }
+
+/* Story Skip */
+.story-skip {
+  z-index: 10;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.35);
+}
+
+/* ══════════════════════════════════════════
+   MAIN PAGE
+   ══════════════════════════════════════════ */
+
+/* Floating BG */
+.bg-elements {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+}
+.bg-elements .balloon, .bg-elements .star, .bg-elements .cloud {
+  position: absolute;
+  animation: floatUp linear infinite;
+  opacity: 0;
+}
+.bg-elements .balloon { font-size: 2.2rem; }
+.bg-elements .star   { font-size: 1.3rem; }
+.bg-elements .cloud  { font-size: 2.5rem; }
+@keyframes floatUp {
+  0%   { transform: translateY(105vh) scale(0.3) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.7; }
+  90%  { opacity: 0.5; }
+  100% { transform: translateY(-15vh) scale(1.1) rotate(15deg); opacity: 0; }
+}
+
+/* ── Title ── */
+.header {
+  position: relative; z-index: 10;
+  text-align: center; padding: 28px 16px 4px;
+}
+.title {
+  display: inline-block;
+  font-size: clamp(1.6rem, 5vw, 3rem);
+  font-weight: 900;
+  color: #fff;
+  background: linear-gradient(135deg, #e74c3c 0%, #f39c12 20%, #2ecc71 40%, #3498db 60%, #9b59b6 80%, #e74c3c 100%);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: rainbowText 3s linear infinite;
+  text-shadow: none;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.35));
+  padding: 6px 0;
+}
+@keyframes rainbowText {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+.subtitle {
+  font-size: 0.95rem;
+  color: #5f27cd;
+  margin-top: 4px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+}
+
+/* ── Main Container ── */
+.main-container {
+  position: relative; z-index: 10;
+  max-width: 520px; margin: 0 auto;
+  padding: 10px 16px 50px;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 18px;
+}
+
+/* ── Draw Counter ── */
+.draw-info {
+  display: flex; gap: 12px; align-items: center;
+}
+.draw-badge {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(10px);
+  padding: 8px 18px; border-radius: 50px;
+  font-weight: 700; color: #5f27cd;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.draw-badge.used {
+  background: rgba(255,107,107,0.15);
+  color: #d63031;
+}
+
+/* ── Gift Box ── */
+.gift-area {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 14px;
+}
+.gift-box-wrapper {
+  position: relative; cursor: pointer;
+  transition: transform 0.15s;
+}
+.gift-box-wrapper:hover { transform: scale(1.06); }
+.gift-box-wrapper:active { transform: scale(0.95); }
+.gift-box-wrapper.disabled {
+  pointer-events: none; cursor: default; opacity: 0.5;
+}
+.gift-box-wrapper.disabled .gift-box { animation: none; }
+
+.gift-box {
+  width: 170px; height: 170px; position: relative;
+  animation: bounce 1.6s ease-in-out infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  30% { transform: translateY(-22px) rotate(2deg); }
+  50% { transform: translateY(0) rotate(-1deg); }
+  70% { transform: translateY(-10px) rotate(1deg); }
+}
+
+.gift-box-body {
+  position: absolute; bottom: 0; left: 14px;
+  width: 142px; height: 105px;
+  background: linear-gradient(180deg, #ff7675 0%, #c0392b 100%);
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(192,57,43,0.35), inset 0 2px 0 rgba(255,255,255,0.25);
+}
+.gift-box-body::after {
+  content: '';
+  position: absolute; left: 50%; transform: translateX(-50%);
+  width: 20px; height: 105px;
+  background: linear-gradient(180deg, #fab1a0 0%, #e17055 100%);
+  border-radius: 3px;
+}
+.gift-box-lid {
+  position: absolute; top: 0; left: 8px;
+  width: 154px; height: 48px;
+  background: linear-gradient(180deg, #ff8a80 0%, #c0392b 100%);
+  border-radius: 12px 12px 4px 4px;
+  box-shadow: 0 4px 15px rgba(192,57,43,0.4);
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  transform-origin: right bottom;
+}
+.gift-box-lid::after {
+  content: '🎀'; position: absolute;
+  top: -18px; left: 50%; transform: translateX(-50%);
+  font-size: 1.8rem;
+}
+.gift-box.opening .gift-box-lid {
+  transform: rotate(-130deg) translateX(28px) translateY(-18px);
+}
+
+.gift-sparkles {
+  position: absolute; inset: -35px; pointer-events: none;
+}
+.gift-sparkles .sparkle {
+  position: absolute; font-size: 1.1rem; opacity: 0;
+}
+.gift-box.opening .sparkle {
+  animation: sparkleBurst 0.8s ease-out forwards;
+}
+@keyframes sparkleBurst {
+  0% { transform: translate(0,0) scale(0); opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) scale(1.4); opacity: 0; }
+}
+
+.gift-hint {
+  font-size: 0.9rem; color: #5f27cd; font-weight: 700;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* ── Result Card ── */
+.gift-result {
+  perspective: 800px;
+  perspective-origin: center center;
+  width: 280px; height: 0;
+  visibility: hidden; opacity: 0;
+  transition: height 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+  margin: 0 auto;
+  will-change: height, opacity;
+}
+.gift-result.show {
+  height: 340px;
+  visibility: visible; opacity: 1;
+}
+.gift-card {
+  width: 100%; height: 100%; position: relative;
+  transition: transform 0.7s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.gift-card.flipped { transform: rotateY(180deg); }
+
+.gift-card-front, .gift-card-back {
+  position: absolute; inset: 0; backface-visibility: hidden;
+  border-radius: 20px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 4px;
+  -webkit-backface-visibility: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.gift-card-front {
+  background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+  box-shadow: 0 10px 35px rgba(108,92,231,0.4);
+  font-size: 2.5rem;
+}
+.gift-card-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(180deg, #fff9e6 0%, #fff3e0 100%);
+  box-shadow: 0 10px 35px rgba(255,152,0,0.25);
+  padding: 14px 14px 10px; text-align: center;
+  border: 2px dashed #ffb74d;
+}
+.gift-card-back .gift-icon {
+  font-size: 2.8rem;
+  animation: popIn 0.4s ease 0.7s both;
+}
+.gift-card-back .gift-name {
+  font-size: 1.05rem; font-weight: 800; color: #e65100;
+  animation: fadeInUp 0.4s ease 0.85s both;
+}
+.gift-card-back .gift-blessing {
+  font-size: 0.8rem; color: #bf360c; line-height: 1.5;
+  animation: fadeInUp 0.4s ease 0.95s both;
+  padding: 0 6px;
+}
+.gift-card-back .pickup-divider {
+  width: 60%; height: 1px;
+  background: linear-gradient(90deg, transparent, #ffb74d, transparent);
+  margin: 4px 0;
+  animation: fadeInUp 0.4s ease 1.05s both;
+}
+.gift-card-back .pickup-info {
+  font-size: 0.68rem; color: #8d6e63; line-height: 1.6;
+  animation: fadeInUp 0.4s ease 1.1s both;
+  text-align: center;
+}
+.gift-card-back .pickup-info .highlight {
+  color: #d63031; font-weight: 700;
+}
+.gift-card-back .pickup-phone {
+  font-size: 0.58rem; color: #bdbdbd;
+  word-break: break-all; line-height: 1.3;
+  animation: fadeInUp 0.4s ease 1.15s both;
+  padding: 0 4px;
+}
+@keyframes popIn {
+  0% { transform: scale(0) rotate(-90deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Buttons ── */
+.btn-row {
+  display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+}
+.btn {
+  padding: 12px 26px; border: none; border-radius: 50px;
+  font-size: 1rem; font-weight: 700; cursor: pointer;
+  transition: all 0.2s; font-family: inherit; letter-spacing: 1px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.18); }
+.btn:active { transform: translateY(0); }
+.btn-primary { background: linear-gradient(135deg, #ff6b6b, #ee5a24); color: #fff; }
+.btn-secondary { background: linear-gradient(135deg, #48dbfb, #0abde3); color: #fff; }
+.btn-tertiary { background: linear-gradient(135deg, #feca57, #ff9ff3); color: #fff; }
+
+/* ── Post-draw Prompt ── */
+.post-draw-prompt {
+  background: rgba(255,255,255,0.8); backdrop-filter: blur(10px);
+  padding: 16px 20px; border-radius: 16px;
+  text-align: center; font-weight: 700;
+  color: #5f27cd; font-size: 0.95rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  max-width: 340px; width: 100%;
+  animation: fadeInUp 0.5s ease both;
+}
+
+/* ── Ribbon Burst ── */
+.ribbon-container {
+  position: fixed; inset: 0; pointer-events: none; z-index: 150;
+}
+.ribbon {
+  position: absolute; width: 7px; height: 36px; border-radius: 3px;
+  animation: ribbonShoot 1.5s cubic-bezier(0,0.7,0.3,1) forwards;
+}
+@keyframes ribbonShoot {
+  0% { transform: translate(0,0) rotate(var(--angle)) scale(0); opacity: 1; }
+  30% { transform: translate(
+    calc(var(--dist)*0.6*cos(var(--a))),
+    calc(var(--dist)*0.6*sin(var(--a)))
+  ) rotate(var(--angle)) scale(1.1); opacity: 1; }
+  100% { transform: translate(
+    calc(var(--dist)*cos(var(--a))),
+    calc(var(--dist)*sin(var(--a)) + 30px)
+  ) rotate(calc(var(--angle) + 200deg)) scale(0.2); opacity: 0; }
+}
+.ribbon-star {
+  position: absolute; font-size: 1.3rem;
+  animation: ribbonStar 1.2s cubic-bezier(0,0.7,0.3,1) forwards;
+}
+@keyframes ribbonStar {
+  0% { transform: translate(0,0) scale(0); opacity: 1; }
+  40% { transform: translate(var(--sx), var(--sy)) scale(1.3); opacity: 1; }
+  100% { transform: translate(var(--ex), var(--ey)) scale(0); opacity: 0; }
+}
+
+/* ── Confetti ── */
+#confetti-container {
+  position: fixed; inset: 0; pointer-events: none; z-index: 100;
+}
+.confetti-piece {
+  position: absolute; top: -20px;
+  animation: confettiFall linear forwards;
+}
+@keyframes confettiFall {
+  0%   { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateY(105vh) rotate(720deg) scale(0.3); opacity: 0; }
+}
+
+/* ── Danmaku ── */
+#danmaku-layer {
+  position: fixed; inset: 0; pointer-events: none; z-index: 50;
+}
+.danmaku {
+  position: absolute; white-space: nowrap; font-weight: 700;
+  animation: danmakuScroll linear forwards;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+@keyframes danmakuScroll {
+  0%   { transform: translateX(100vw); }
+  100% { transform: translateX(-100%); }
+}
+
+/* ── Blessing Form ── */
+.blessing-form {
+  display: flex; gap: 8px; width: 100%; max-width: 380px;
+}
+.blessing-input {
+  flex: 1; padding: 10px 16px; border: 2px solid #dfe6e9;
+  border-radius: 50px; font-size: 0.95rem; font-family: inherit;
+  outline: none; transition: border-color 0.2s;
+  background: rgba(255,255,255,0.8); backdrop-filter: blur(10px);
+}
+.blessing-input:focus { border-color: #6c5ce7; }
+.blessing-send {
+  padding: 10px 20px; border: none; border-radius: 50px;
+  background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+  color: #fff; font-weight: 700; font-size: 0.95rem;
+  cursor: pointer; font-family: inherit; transition: all 0.2s;
+}
+.blessing-send:hover { transform: scale(1.05); }
+.blessing-send:active { transform: scale(0.95); }
+
+/* ── History ── */
+.history-section {
+  width: 100%; max-width: 420px;
+}
+.history-title {
+  font-size: 0.95rem; font-weight: 700; color: #5f27cd;
+  text-align: center; margin-bottom: 8px;
+}
+.history-list {
+  display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+}
+.history-item {
+  background: rgba(255,255,255,0.7); backdrop-filter: blur(10px);
+  padding: 7px 14px; border-radius: 20px;
+  font-size: 0.85rem; font-weight: 600; color: #e65100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  animation: fadeInUp 0.4s ease both;
+}
+
+/* ── Ending Overlay ── */
+.ending-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+  z-index: 400;
+  opacity: 0; visibility: hidden; transition: opacity 0.4s, visibility 0.4s;
+}
+.ending-overlay.show { opacity: 1; visibility: visible; }
+.ending-card {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(180deg, #1a1a35 0%, #2d1b4e 100%);
+  border-radius: 24px; padding: 36px 24px 28px;
+  max-width: 360px; width: calc(100% - 32px);
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  border: 2px solid rgba(255,255,255,0.1);
+  max-height: 85vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: 401;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.ending-overlay.show .ending-card { opacity: 1; }
+.ending-stars {
+  position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+  font-size: 1.5rem; letter-spacing: 6px;
+}
+.ending-emoji { font-size: 4rem; display: block; margin: 8px 0; }
+.ending-text {
+  color: rgba(255,255,255,0.9); line-height: 2;
+  font-size: 0.95rem; font-weight: 600; margin: 8px 0 16px;
+}
+.ending-text .highlight {
+  color: #ffd700; font-size: 1.1rem; font-weight: 800;
+}
+.ending-close {
+  padding: 12px 32px; border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 50px; background: transparent; color: #fff;
+  font-size: 0.9rem; font-weight: 600; cursor: pointer;
+  font-family: inherit; transition: all 0.2s;
+}
+.ending-close:hover { background: rgba(255,255,255,0.1); }
+
+/* ── Blessings Wall ── */
+.blessings-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+  z-index: 500; display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s;
+}
+.blessings-overlay.show { opacity: 1; visibility: visible; }
+.blessings-card {
+  background: #fff; border-radius: 20px;
+  padding: 24px 20px 20px;
+  max-width: 400px; width: calc(100% - 32px);
+  max-height: 75vh; display: flex; flex-direction: column;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  position: relative;
+  animation: endingFadeIn 0.35s ease both;
+}
+.blessings-close {
+  position: absolute; top: 8px; right: 14px;
+  background: none; border: none; font-size: 1.5rem;
+  cursor: pointer; color: #999; z-index: 5;
+}
+.blessings-close:hover { color: #333; }
+.blessings-heading {
+  font-size: 1.3rem; font-weight: 800; color: #5f27cd;
+  text-align: center; margin-bottom: 2px;
+}
+.blessings-sub {
+  font-size: 0.8rem; color: #999; text-align: center; margin-bottom: 12px;
+}
+.blessings-list {
+  flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  display: flex; flex-direction: column; gap: 8px;
+  padding-right: 4px;
+}
+.blessings-item {
+  background: linear-gradient(135deg, #fff9e6, #f3e5f5);
+  padding: 10px 14px; border-radius: 12px;
+  font-size: 0.9rem; color: #444; line-height: 1.5;
+  animation: fadeInUp 0.3s ease both;
+}
+.blessings-item .bless-time {
+  font-size: 0.7rem; color: #bbb; margin-top: 2px;
+}
+
+/* ── Music Toggle ── */
+.music-toggle {
+  position: fixed; top: 16px; right: 16px; z-index: 200;
+  width: 42px; height: 42px; border-radius: 50%; border: none;
+  background: rgba(255,255,255,0.7); backdrop-filter: blur(10px);
+  font-size: 1.3rem; cursor: pointer;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+  transition: transform 0.2s;
+}
+.music-toggle:hover { transform: scale(1.1); }
+
+/* ── Mobile Responsive ── */
+@media (max-width: 480px) {
+  /* Story */
+  .story-overlay { align-items: stretch; }
+  .story-container {
+    height: 100vh; height: 100dvh;
+    max-width: 100%; border-radius: 0;
+  }
+  .story-scene { padding: 0 16px 30px; }
+  .story-bubble { max-width: 280px; padding: 12px 14px; }
+  .story-bubble .bubble-text { font-size: 0.82rem; line-height: 1.7; }
+  .story-enter-btn { padding: 12px 32px; font-size: 1rem; }
+
+  /* Scene element adjustments */
+  .scene-visual.scene1 .bed { font-size: 4.5rem; }
+  .scene-visual.scene1 .window { width: 100px; height: 75px; }
+  .scene-visual.scene1 .alarm { font-size: 1.5rem; }
+  .scene-visual.scene1 .clock-text { font-size: 1.2rem; }
+  .scene-visual.scene2 .student { font-size: 2.8rem; left: 35%; }
+  .scene-visual.scene2 .desk { font-size: 2rem; }
+  .scene-visual.scene3 .swirl { font-size: 1.5rem; }
+  .scene-visual.scene4 .shop-door { font-size: 5rem; }
+  .scene-visual.scene4 .mystery-figure { font-size: 3rem; left: 20%; }
+  .scene-visual.scene4 .shop-sign { font-size: 1rem; }
+  .scene-visual.scene5 .gift-glow { font-size: 6rem; }
+
+  /* Header */
+  .header { padding: 16px 12px 0; }
+  .title { font-size: clamp(1.2rem, 7vw, 1.8rem); padding: 4px 0; }
+  .subtitle { font-size: 0.8rem; letter-spacing: 1px; }
+
+  /* Main container */
+  .main-container { padding: 6px 12px 40px; gap: 14px; max-width: 100%; }
+
+  /* Draw badges */
+  .draw-info { gap: 6px; flex-wrap: wrap; justify-content: center; }
+  .draw-badge { padding: 6px 12px; font-size: 0.78rem; }
+
+  /* Gift box */
+  .gift-area { gap: 10px; }
+  .gift-box { width: 135px; height: 135px; }
+  .gift-box-body { width: 112px; height: 82px; left: 11px; }
+  .gift-box-lid { width: 124px; height: 38px; left: 6px; }
+  .gift-box-body::after { width: 15px; height: 82px; }
+  .gift-box-lid::after { font-size: 1.3rem; top: -14px; }
+  .gift-sparkles { inset: -28px; }
+  .gift-sparkles .sparkle { font-size: 0.9rem; }
+  .gift-hint { font-size: 0.8rem; }
+
+  /* Result card */
+  .gift-result { width: 220px; }
+  .gift-result.show { height: 160px; }
+  .gift-card-front { font-size: 2rem; }
+  .gift-card-back .gift-icon { font-size: 3.5rem; }
+  .gift-card-back .gift-name { font-size: 1rem; }
+  .gift-card-back .gift-blessing { font-size: 0.75rem; }
+
+  /* Buttons */
+  .btn-row { gap: 8px; }
+  .btn { padding: 10px 18px; font-size: 0.85rem; letter-spacing: 0; }
+
+  /* Post-draw prompt */
+  .post-draw-prompt { padding: 12px 14px; font-size: 0.85rem; max-width: 100%; }
+
+  /* Blessing form */
+  .blessing-form { max-width: 100%; gap: 6px; }
+  .blessing-input { padding: 10px 14px; font-size: 0.85rem; }
+  .blessing-send { padding: 10px 16px; font-size: 0.85rem; }
+
+  /* History */
+  .history-section { max-width: 100%; }
+  .history-item { padding: 6px 10px; font-size: 0.78rem; }
+
+  /* Danmaku */
+  .danmaku { font-size: 0.75rem; }
+
+  /* Result card mobile */
+  .gift-result { width: 240px; }
+  .gift-result.show { height: 310px; }
+  .gift-card-back { padding: 10px 8px 6px; }
+  .gift-card-back .gift-icon { font-size: 2.2rem; }
+  .gift-card-back .gift-name { font-size: 0.9rem; }
+  .gift-card-back .gift-blessing { font-size: 0.72rem; }
+  .gift-card-back .pickup-info { font-size: 0.6rem; }
+  .gift-card-back .pickup-phone { font-size: 0.52rem; }
+
+  /* Ending overlay */
+  .ending-card { padding: 24px 16px 20px; max-width: 300px; width: calc(100% - 24px); max-height: 80vh; }
+  .ending-stars { font-size: 1.2rem; letter-spacing: 4px; top: 10px; }
+  .ending-emoji { font-size: 3rem; }
+  .ending-text { font-size: 0.82rem; line-height: 1.9; }
+  .ending-text .highlight { font-size: 0.95rem; }
+  .ending-close { padding: 10px 24px; font-size: 0.85rem; }
+
+  /* Ribbon burst stays within viewport */
+  .ribbon { width: 5px; height: 28px; }
+  .ribbon-star { font-size: 1rem; }
+
+  /* Confetti */
+  .confetti-piece { font-size: 7px !important; }
+
+  /* Music toggle */
+  .music-toggle { top: 10px; right: 10px; width: 36px; height: 36px; font-size: 1.1rem; }
+}
+
+@media (max-width: 360px) {
+  .story-bubble { max-width: 250px; }
+  .story-bubble .bubble-text { font-size: 0.78rem; }
+  .gift-box { width: 115px; height: 115px; }
+  .gift-box-body { width: 95px; height: 70px; left: 10px; }
+  .gift-box-lid { width: 106px; height: 32px; left: 5px; }
+  .gift-box-body::after { width: 13px; height: 70px; }
+  .gift-box-lid::after { font-size: 1.1rem; top: -11px; }
+  .gift-result { width: 190px; }
+  .gift-result.show { height: 290px; }
+  .gift-card-back .gift-icon { font-size: 1.8rem; }
+  .gift-card-back .gift-name { font-size: 0.8rem; }
+  .gift-card-back .gift-blessing { font-size: 0.65rem; }
+  .gift-card-back .pickup-info { font-size: 0.55rem; }
+  .gift-card-back .pickup-phone { font-size: 0.48rem; }
+  .btn { padding: 8px 14px; font-size: 0.8rem; }
+  .btn-row { gap: 6px; }
+  .draw-badge { padding: 5px 10px; font-size: 0.72rem; }
+  .ending-card { max-width: 270px; padding: 20px 14px 16px; width: calc(100% - 20px); max-height: 78vh; }
+  .ending-text { font-size: 0.78rem; }
+  .blessings-card { max-width: 320px; padding: 18px 14px 14px; }
+  .blessings-item { font-size: 0.82rem; padding: 8px 10px; }
+  .title { font-size: clamp(1rem, 8vw, 1.4rem); }
+  .subtitle { font-size: 0.72rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Hidden audio elements for story scenes (BGM) -->
+<audio id="audioScene1" class="scene-audio" src="页面2.mp3" preload="auto" loop></audio>
+<audio id="audioScene3" class="scene-audio" src="页面4.mp3" preload="auto" loop></audio>
+
+<!-- ═══════════════ STORY INTRO ═══════════════ -->
+<div class="story-overlay" id="storyOverlay" style="pointer-events:auto" onclick="window._storyClick(event)">
+  <div class="story-container" id="storyContainer">
+    <button class="story-back-btn" id="storyBackBtn" title="上一页">◀</button>
+    <div class="story-dots" id="storyDots">
+      <span class="story-dot active"></span>
+      <span class="story-dot"></span>
+      <span class="story-dot"></span>
+      <span class="story-dot"></span>
+      <span class="story-dot"></span>
+    </div>
+
+    <!-- Scene 1: 早八 -->
+    <div class="story-scene active" data-scene="0">
+      <div class="scene-visual scene1">
+        <div class="room"></div>
+        <div class="window"></div>
+        <div class="bed">🛏️</div>
+        <div class="alarm">⏰</div>
+        <div class="clock-text">07:50</div>
+      </div>
+      <div class="story-bubble">
+        <span class="bubble-emoji">😴</span>
+        <span class="bubble-text"><strong>6月1日，周一。</strong><br>闹钟响了第三遍。你从被窝里探出头，瞥了一眼手机——<br>「完了，早八。」</span>
+      </div>
+    </div>
+
+    <!-- Scene 2: 课堂昏沉 -->
+    <div class="story-scene" data-scene="1">
+      <div class="scene-visual scene2">
+        <div class="classroom"></div>
+        <div class="blackboard">
+          <span class="blackboard-text">第六章  ......<br>这个知识点......<br>期末考试...... 重点......</span>
+        </div>
+        <div class="desk-row"><span class="desk">💻</span><span class="desk">📖</span></div>
+        <div class="student">😵</div>
+        <div class="zzz" style="top:22%;right:28%;">z</div>
+        <div class="zzz" style="top:18%;right:22%;animation-delay:0.5s;">z</div>
+        <div class="zzz" style="top:14%;right:16%;animation-delay:1s;">z</div>
+      </div>
+      <div class="story-bubble">
+        <span class="bubble-emoji">📚</span>
+        <span class="bubble-text">讲台上老师的声音越来越远……<br>PPT上的字开始模糊、旋转。<br>你的眼皮，终于撑不住了。</span>
+      </div>
+    </div>
+
+    <!-- Scene 3: 恍惚入梦 -->
+    <div class="story-scene" data-scene="2">
+      <div class="scene-visual scene3">
+        <div class="dream-bg"></div>
+        <span class="swirl" style="top:12%;left:20%;animation-delay:0s;">✨</span>
+        <span class="swirl" style="top:20%;left:65%;animation-delay:0.8s;">💫</span>
+        <span class="swirl" style="top:50%;left:30%;animation-delay:1.6s;">🌟</span>
+        <span class="swirl" style="top:60%;left:70%;animation-delay:0.4s;">✨</span>
+        <span class="swirl" style="top:35%;left:45%;animation-delay:1.2s;">🔮</span>
+      </div>
+      <div class="story-bubble">
+        <span class="bubble-emoji">🌌</span>
+        <span class="bubble-text">意识逐渐模糊……<br>恍惚之间，你发现自己站在<br>一扇发光的门前。<br>门楣上写着：<br><strong>「童心礼物商店」</strong></span>
+      </div>
+    </div>
+
+    <!-- Scene 4: 神秘礼物店 -->
+    <div class="story-scene" data-scene="3">
+      <div class="scene-visual scene4">
+        <div class="shop-bg"></div>
+        <div class="shop-sign">✨ 童 心 礼 物 商 店 ✨</div>
+        <div class="shop-door">🚪</div>
+        <div class="mystery-figure">🧙‍♂️</div>
+        <span class="sparkle-shop" style="top:20%;left:18%;">⭐</span>
+        <span class="sparkle-shop" style="top:30%;right:15%;animation-delay:0.7s;">✨</span>
+        <span class="sparkle-shop" style="top:55%;right:25%;animation-delay:0.3s;">💫</span>
+      </div>
+      <div class="story-bubble">
+        <span class="bubble-emoji">🧙‍♂️</span>
+        <span class="bubble-text">「欢迎，年轻的朋友。」<br>一个神秘的声音从柜台后传来。<br>「我知道你已经很多年没过六一了。<br><strong>但心里住着孩子的人，<br>永远有资格收到礼物。」</strong></span>
+      </div>
+    </div>
+
+    <!-- Scene 5: 抽奖邀请 -->
+    <div class="story-scene" data-scene="4">
+      <div class="scene-visual scene5">
+        <div class="shop-bg2"></div>
+        <div class="gift-glow">🎁</div>
+        <span class="swirl" style="top:15%;left:12%;animation-delay:0s;">✨</span>
+        <span class="swirl" style="top:25%;right:10%;animation-delay:0.6s;">💫</span>
+        <span class="swirl" style="top:40%;left:18%;animation-delay:1.2s;">⭐</span>
+      </div>
+      <div class="story-bubble">
+        <span class="bubble-emoji">🎁</span>
+        <span class="bubble-text">「来抽个奖吧——」<br>「命运决定你的六一礼物。」<br>「你有<strong>两次机会</strong>，<br>看看能抽到什么？」</span>
+      </div>
+      <button class="story-enter-btn" id="storyEnterBtn" onclick="event.stopPropagation();var o=document.getElementById('storyOverlay');o.classList.add('hidden');setTimeout(function(){if(!window._mainReady){if(typeof initMain==='function')initMain();window._mainReady=1;if(typeof sendDanmaku==='function'){setTimeout(function(){sendDanmaku('🎈 欢迎来到童心礼物商店！')},200);setTimeout(function(){sendDanmaku('🐴 每个大人心里都住着一个小孩~')},700);setTimeout(function(){sendDanmaku('💬 在底部发送你的六一祝福弹幕吧！')},1200)}}},300)">✨ 开始抽奖 ✨</button>
+      <p class="story-skip" id="storySkip">点击屏幕继续 →</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ MAIN PAGE ═══════════════ -->
+
+<div class="bg-elements" id="bgElements"></div>
+<button class="music-toggle" id="musicToggle" title="音乐开关">🔇</button>
+<div id="danmakuLayer"></div>
+<div id="confettiContainer"></div>
+<div class="ribbon-container" id="ribbonContainer"></div>
+
+
+<!-- Ending Overlay -->
+<div class="ending-overlay" id="endingOverlay">
+  <div class="ending-card">
+    <div class="ending-stars">⭐ 🌟 ✨ 💫 ⭐</div>
+    <span class="ending-emoji">💝</span>
+    <p class="ending-text">
+      小时候，我们急着长大。<br>
+      长大后，才发现童心最珍贵。<br><br>
+      <span class="highlight">不管多少岁，</span><br>
+      <span class="highlight">都要好好爱自己哦。</span><br><br>
+      累了就休息，难过就哭，<br>
+      开心就笑，想玩就去玩。<br><br>
+      你心里那个小孩，<br>
+      一直都在。<br><br>
+      🌸 <strong>六一快乐，永远快乐。</strong> 🌸<br><br>
+      <span style="color:#aaa;font-size:0.8rem;">—— 其实快乐，就是给自己最好的六一礼物</span><br>
+      <span style="color:#888;font-size:0.75rem;">From 小滕</span>
+    </p>
+    <button class="ending-close" id="endingClose">💌 我会的</button>
+  </div>
+</div>
+
+<!-- Blessings Wall Modal -->
+<div class="blessings-overlay" id="blessingsOverlay">
+  <div class="blessings-card" id="blessingsCard">
+    <button class="blessings-close" id="blessingsClose">&times;</button>
+    <h2 class="blessings-heading">💌 六一祝福墙</h2>
+    <p class="blessings-sub">大家写下的祝福都在这里啦～</p>
+    <div class="blessings-list" id="blessingsList">
+      <p style="color:#999;text-align:center;">还没有人送出祝福，来做第一个吧！</p>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<div class="header">
+  <h1 class="title">🎈 六一儿童节快乐！🎈</h1>
+  <p class="subtitle">✨ 点击礼物盒，抽取你的儿童节礼物 ✨</p>
+</div>
+
+<!-- Main -->
+<div class="main-container">
+  <!-- Draw info -->
+  <div class="draw-info">
+    <span class="draw-badge" id="drawBadge1">🎁 第 1 次抽奖</span>
+    <span class="draw-badge" id="drawBadge2">🎁 第 2 次抽奖</span>
+  </div>
+
+  <!-- Gift Box -->
+  <div class="gift-area">
+    <div class="gift-box-wrapper" id="giftBoxWrapper">
+      <div class="gift-box" id="giftBox">
+        <div class="gift-box-lid"></div>
+        <div class="gift-box-body"></div>
+        <div class="gift-sparkles">
+          <span class="sparkle" style="top:10%;left:10%;--dy:-55px;--dx:-45px;">✨</span>
+          <span class="sparkle" style="top:5%;right:10%;--dy:-65px;--dx:35px;">⭐</span>
+          <span class="sparkle" style="top:50%;right:-5%;--dy:-25px;--dx:60px;">💫</span>
+          <span class="sparkle" style="top:60%;left:-5%;--dy:-20px;--dx:-60px;">🌟</span>
+          <span class="sparkle" style="bottom:20%;left:30%;--dy:-35px;--dx:-20px;">✨</span>
+          <span class="sparkle" style="bottom:25%;right:25%;--dy:-45px;--dx:25px;">💖</span>
+        </div>
+      </div>
+    </div>
+    <p class="gift-hint" id="giftHint">👆 点我抽礼物！</p>
+  </div>
+
+  <!-- Result card -->
+  <div class="gift-result" id="giftResult">
+    <div class="gift-card" id="giftCard">
+      <div class="gift-card-front">🎁</div>
+      <div class="gift-card-back">
+        <span class="gift-icon" id="giftIcon"></span>
+        <span class="gift-name" id="giftName"></span>
+        <span class="gift-blessing" id="giftBlessing"></span>
+        <div class="pickup-divider"></div>
+        <div class="pickup-info">
+          📸 <span class="highlight">请截图此页面</span><br>
+          凭截图到<strong>小滕</strong>处领取礼物<br>
+          📍 枫园12舍322室
+        </div>
+        <span class="pickup-phone"><strong>Tel：</strong>liuyikuailezhebushidianhuahaomawoluanxiede</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Post-draw prompt -->
+  <div class="post-draw-prompt" id="postDrawPrompt" style="display:none;"></div>
+
+  <!-- Buttons -->
+  <div class="btn-row">
+    <button class="btn btn-primary" id="btnDraw">🎲 抽取礼物</button>
+    <button class="btn btn-secondary" id="btnReset">🔄 重新打开</button>
+    <button class="btn btn-tertiary" id="btnShare">📋 分享祝福</button>
+    <button class="btn btn-secondary" id="btnBlessings">💌 祝福墙</button>
+  </div>
+
+  <!-- Blessing form -->
+  <form class="blessing-form" id="blessingForm">
+    <input class="blessing-input" id="blessingInput" type="text"
+           placeholder="💬 写下你的六一祝福..." maxlength="30" autocomplete="off">
+    <button class="blessing-send" type="submit">发送 🚀</button>
+  </form>
+
+  <!-- History -->
+  <div class="history-section" id="historySection" style="display:none;">
+    <p class="history-title">🎁 你的礼物记录：</p>
+    <div class="history-list" id="historyList"></div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════
+// STORY INTRO
+// ══════════════════════════════════════════
+(function() {
+const $storyOverlay = document.getElementById('storyOverlay');
+const $storyContainer = document.getElementById('storyContainer');
+const $storyEnterBtn = document.getElementById('storyEnterBtn');
+const $storySkip = document.getElementById('storySkip');
+const $storyDots = document.getElementById('storyDots');
+const $storyBackBtn = document.getElementById('storyBackBtn');
+const scenes = document.querySelectorAll('.story-scene');
+let currentScene = 0;
+let currentAudioTimer = null;
+
+if (!$storyContainer || scenes.length === 0) return; // safety
+
+function updateDots() {
+  if (!$storyDots) return;
+  Array.from($storyDots.children).forEach(function(d, i) { d.classList.toggle('active', i === currentScene); });
+}
+
+function stopAudio() {
+  try {
+    if (currentAudioTimer) { clearInterval(currentAudioTimer); clearTimeout(currentAudioTimer); currentAudioTimer = null; }
+    document.querySelectorAll('.scene-audio').forEach(function(a) { a.pause(); a.currentTime = 0; });
+  } catch(e) {}
+}
+
+function playAudio(sceneIdx) {
+  stopAudio();
+  try {
+    if (sceneIdx === 0) {
+      // ── Page 1: Alarm clock rings ──
+      var beep = 0;
+      function tick() {
+        if (typeof playNote === 'function') {
+          if (beep % 4 < 3) playNote(880, 0.12, 0, 'square', 0.07);
+        }
+        currentAudioTimer = setTimeout(tick, beep % 4 === 2 ? 500 : 200);
+        beep++;
+      }
+      tick();
+    } else if (sceneIdx === 1) {
+      // ── Page 2: Classroom BGM (D:\下载\页面2.mp3) ──
+      var a1 = document.getElementById('audioScene1');
+      if (a1) { a1.currentTime = 0; a1.play().catch(function(){}); }
+    } else if (sceneIdx === 2) {
+      // ── Page 3: Entering dream ─ dreamy ambient soundscape ──
+      if (typeof playNote === 'function') {
+        var dreamDrone = [131, 165, 196, 262, 330];
+        var dreamChimes = [523, 659, 784, 1047, 1175];
+        var dIdx = 0;
+        function dreamTick() {
+          var base = dreamDrone[dIdx % dreamDrone.length];
+          playNote(base, 1.2, 0, 'sine', 0.025);
+          playNote(base * 1.005, 1.4, 0.15, 'sine', 0.012);
+          if (dIdx % 3 === 0) {
+            var ch = dreamChimes[Math.floor(Math.random() * dreamChimes.length)];
+            playNote(ch, 0.5, Math.random() * 0.3, 'sine', 0.018);
+          }
+          if (dIdx % 5 === 0) {
+            playNote(262, 2.0, 0, 'sine', 0.015);
+          }
+          dIdx++;
+        }
+        dreamTick();
+        currentAudioTimer = setInterval(dreamTick, 1400);
+      }
+    } else if (sceneIdx === 3) {
+      // ── Page 4: Mysterious gift shop ─ magic chime + BGM (页面4.mp3) ──
+      if (typeof playNote === 'function') {
+        [1047, 1319, 1568].forEach(function(f, i) { playNote(f, 0.25, i * 0.12, 'sine', 0.04); });
+      }
+      var a3 = document.getElementById('audioScene3');
+      if (a3) { a3.currentTime = 0; a3.play().catch(function(){}); }
+    } else if (sceneIdx === 4) {
+      // ── Page 5: Invitation ─ magical music-box melody ──
+      if (typeof playNote === 'function') {
+        var pentatonic = [523, 587, 659, 784, 880, 1047, 1175, 1319];
+        var melodyPattern = [0, 2, 4, 5, 4, 2, 0, 3, 5, 7, 5, 3, 4, 2, 0];
+        var mIdx = 0;
+        function magicTick() {
+          var ni = melodyPattern[mIdx % melodyPattern.length];
+          var freq = pentatonic[ni];
+          playNote(freq, 0.35, 0, 'triangle', 0.045);
+          if (mIdx % 4 === 0) playNote(freq / 2, 0.5, 0, 'sine', 0.03);
+          mIdx++;
+        }
+        magicTick();
+        currentAudioTimer = setInterval(magicTick, 420);
+      }
+    }
+  } catch(e) {}
+}
+
+function showScene(i) {
+  for (var s = 0; s < scenes.length; s++) { scenes[s].classList.remove('active'); }
+  if (scenes[i]) scenes[i].classList.add('active');
+  currentScene = i;
+  $storyOverlay._sc = i; // sync with inline onclick
+  updateDots();
+  if ($storySkip) $storySkip.textContent = i >= 4 ? '' : '点击屏幕继续 →';
+  if ($storyBackBtn) $storyBackBtn.classList.toggle('visible', i > 0);
+  playAudio(i);
+}
+
+// Click to advance handled by inline onclick on storyContainer (belt and suspenders)
+// Sync JS scene state with inline _sc when showScene is called by back button or keyboard
+
+// Back button
+if ($storyBackBtn) {
+  $storyBackBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (currentScene > 0) showScene(currentScene - 1);
+  });
+}
+
+// Enter button
+if ($storyEnterBtn) {
+  $storyEnterBtn.addEventListener('click', function(e) { e.stopPropagation(); stopAudio(); enterMain(); });
+}
+
+// Keyboard nav
+document.addEventListener('keydown', function(e) {
+  if (!$storyOverlay || $storyOverlay.classList.contains('hidden')) return;
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.code === 'Space' || e.key === 'Enter') {
+    e.preventDefault();
+    if (currentScene < 4) showScene(currentScene + 1);
+    else { stopAudio(); enterMain(); }
+  }
+  if (e.key === 'ArrowLeft') {
+    e.preventDefault();
+    if (currentScene > 0) showScene(currentScene - 1);
+  }
+});
+
+// Touch swipe
+var touchY = 0;
+$storyContainer.addEventListener('touchstart', function(e) { touchY = e.touches[0].clientY; });
+$storyContainer.addEventListener('touchend', function(e) {
+  var dy = touchY - e.changedTouches[0].clientY;
+  if (Math.abs(dy) > 40) {
+    if (dy > 0 && currentScene < 4) showScene(currentScene + 1);
+    else if (dy < 0 && currentScene > 0) showScene(currentScene - 1);
+  }
+});
+
+// expose for inline onclick (belt and suspenders)
+// Expose story audio control globally
+window._stopStoryAudio = stopAudio;
+window._storyClick = function(e) {
+  e = e || window.event;
+  var target = e.target || e.srcElement;
+  if (target === $storyEnterBtn || (target.closest && target.closest('.story-enter-btn'))) return;
+  if ($storyBackBtn && (target === $storyBackBtn || (target.closest && target.closest('.story-back-btn')))) return;
+  if (currentScene < 4) showScene(currentScene + 1);
+};
+window._storyEnterMain = function() { stopAudio(); enterMain(); };
+
+// Unlock AudioContext on first user interaction
+var _audioUnlocked = false;
+function _unlockAudio() {
+  if (_audioUnlocked) return;
+  _audioUnlocked = true;
+  getCtx();
+}
+$storyOverlay.addEventListener('click', _unlockAudio, { once: true });
+$storyOverlay.addEventListener('touchstart', _unlockAudio, { once: true });
+})();
+
+function stopAllAudio() {
+  try {
+    if (window._stopStoryAudio) window._stopStoryAudio();
+    document.querySelectorAll('audio').forEach(function(a) { a.pause(); a.currentTime = 0; });
+  } catch(e) {}
+}
+
+function enterMain() {
+  stopAllAudio();
+  $storyOverlay.classList.add('hidden');
+  setTimeout(() => {
+    if (!initialized) initMain();
+    setTimeout(() => sendDanmaku('🎈 欢迎来到童心礼物商店！'), 200);
+    setTimeout(() => sendDanmaku('🐴 每个大人心里都住着一个小孩~'), 700);
+    setTimeout(() => sendDanmaku('💬 在底部发送你的六一祝福弹幕吧！'), 1200);
+  }, 300);
+}
+
+// ══════════════════════════════════════════
+// GIFT DATA
+// ══════════════════════════════════════════
+const GIFTS = [
+  {
+    icon: '🐴',
+    name: '陶瓷小马',
+    blessing: '「马上快乐！马上有钱！」\n（好吧我的意思是苟富贵勿相忘嘿嘿）',
+  },
+  {
+    icon: '🥛',
+    name: '旺仔牛奶',
+    blessing: '「小孩儿都喜欢！」',
+  },
+];
+
+// ══════════════════════════════════════════
+// COMMUNITY DANMAKU (pre-seeded, always replay)
+// ══════════════════════════════════════════
+const COMMUNITY_DANMAKU = [
+  '🎉 六一快乐！永远做小朋友！',
+  '🐴 陶瓷小马超可爱！我抽到了！',
+  '😭 早八人早八魂，六一还要上课',
+  '💪 不管几岁，童心万岁！',
+  '🥛 旺仔牛奶yyds！',
+  '🌟 今天我是三岁小朋友！',
+  '📚 上课摸鱼来抽个奖嘿嘿',
+  '💖 祝大家永远开心！',
+  '🎈 儿童节快乐呀各位大儿童！',
+  '🦄 心里的孩子永远不要长大',
+  '🍬 揣着一口袋的开心~',
+  '🌈 成年了也要过六一！',
+  '🎀 谁还不是个宝宝了',
+  '💫 今天不做大人了！',
+  '🌸 保持可爱，永远被爱',
+  '🎪 来领你的六一礼物啦',
+  '⭐ 每个大人都曾是小孩',
+  '🎠 小时候真好，现在也是',
+  '💝 爱自己是终身浪漫的开始',
+  '🍭 愿你出走半生，归来仍是少年',
+  '🎨 用色彩填满平凡的日子',
+  '🦋 童心是永远的避风港',
+  '🌻 今天要做最快乐的小朋友！',
+  '🎵 六一快乐！我们都是孩子！',
+  '💌 给自己买根棒棒糖吧~',
+  '🍦 夏天的风和你都是甜的',
+  '🎁 神秘商店也太酷了吧',
+  '🌙 愿你的梦里永远有糖果和彩虹',
+  '🔮 抽到的都是最好的安排',
+  '💐 六一快乐！记得好好爱自己',
+];
+
+// ══════════════════════════════════════════
+// DANMAKU PERSISTENCE
+// ══════════════════════════════════════════
+const DANMAKU_STORAGE_KEY = 'childrens_day_danmaku_v2';
+
+function getSavedDanmaku() {
+  try {
+    const raw = localStorage.getItem(DANMAKU_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch(e) { return []; }
+}
+
+function saveDanmaku(text) {
+  try {
+    const list = getSavedDanmaku();
+    list.push(text);
+    while (list.length > 200) list.shift();
+    localStorage.setItem(DANMAKU_STORAGE_KEY, JSON.stringify(list));
+    updateUrlHash();
+  } catch(e) { /* storage full, ignore */ }
+}
+
+function getAllDanmaku() {
+  // Merge community + saved, deduplicate
+  const saved = getSavedDanmaku();
+  const all = [...COMMUNITY_DANMAKU];
+  for (const d of saved) {
+    if (!all.includes(d)) all.push(d);
+  }
+  return all;
+}
+
+// ══════════════════════════════════════════
+// DANMAKU SHARING VIA URL HASH
+// Encode user danmaku into shareable URL so
+// the next person who opens the link sees them
+// ══════════════════════════════════════════
+
+function encodeDanmakuForUrl(list) {
+  const toEncode = list.slice(-40);
+  const json = JSON.stringify(toEncode);
+  return btoa(encodeURIComponent(json));
+}
+
+function decodeDanmakuFromUrl(encoded) {
+  try {
+    const json = decodeURIComponent(atob(encoded));
+    return JSON.parse(json);
+  } catch(e) { return []; }
+}
+
+function loadDanmakuFromUrl() {
+  const hash = window.location.hash;
+  if (!hash || hash.indexOf('d=') === -1) return;
+  try {
+    const idx = hash.indexOf('d=');
+    const encoded = hash.slice(idx + 2).split('&')[0];
+    if (!encoded) return;
+    const incoming = decodeDanmakuFromUrl(encoded);
+    if (!incoming || incoming.length === 0) return;
+
+    const existing = getSavedDanmaku();
+    let added = 0;
+    for (const d of incoming) {
+      if (typeof d === 'string' && existing.indexOf(d) === -1) {
+        existing.push(d);
+        added++;
+      }
+    }
+    if (added > 0) {
+      while (existing.length > 200) existing.shift();
+      localStorage.setItem(DANMAKU_STORAGE_KEY, JSON.stringify(existing));
+    }
+  } catch(e) { /* ignore malformed hash */ }
+}
+
+function generateShareUrl() {
+  const allDanmaku = getSavedDanmaku();
+  if (allDanmaku.length === 0) {
+    return window.location.href.split('#')[0];
+  }
+  const encoded = encodeDanmakuForUrl(allDanmaku);
+  const base = window.location.href.split('#')[0];
+  return base + '#d=' + encoded;
+}
+
+// ══════════════════════════════════════════
+// DANMAKU TRACK SYSTEM (防重叠)
+// ══════════════════════════════════════════
+const DANMAKU_TRACKS = 14;
+const trackOccupied = new Array(DANMAKU_TRACKS).fill(false);
+const danmakuColors = [
+  '#ff6b6b','#feca57','#48dbfb','#ff9ff3','#a29bfe',
+  '#00d2d3','#ffa502','#2ed573','#70a1ff','#ff4757',
+  '#ffc312','#1e90ff','#ff6348','#7bed9f',
+];
+
+function findFreeTrack() {
+  const free = [];
+  for (let i = 0; i < DANMAKU_TRACKS; i++) {
+    if (!trackOccupied[i]) free.push(i);
+  }
+  return free.length > 0 ? free[Math.floor(Math.random() * free.length)] : -1;
+}
+
+function sendDanmaku(text, forceColor) {
+  const track = findFreeTrack();
+  if (track === -1) { setTimeout(() => sendDanmaku(text, forceColor), 300); return; }
+  trackOccupied[track] = true;
+
+  const el = document.createElement('div');
+  el.className = 'danmaku';
+  el.textContent = text;
+  el.style.color = forceColor || danmakuColors[Math.floor(Math.random() * danmakuColors.length)];
+  el.style.fontSize = (0.8 + Math.random() * 0.45) + 'rem';
+  const topPct = 2 + track * ((96 - 2) / DANMAKU_TRACKS) + (Math.random() - 0.5) * 2;
+  el.style.top = topPct + '%';
+  el.style.animationDuration = (9 + text.length * 0.2 + Math.random() * 4) + 's';
+
+  document.getElementById('danmakuLayer').appendChild(el);
+  el.addEventListener('animationend', () => { el.remove(); trackOccupied[track] = false; });
+}
+
+let danmakuTimer = null;
+function startAutoDanmaku() {
+  if (danmakuTimer) return;
+  const allDanmaku = getAllDanmaku();
+  let idx = 0;
+
+  // Initial burst
+  for (let i = 0; i < 10; i++) {
+    setTimeout(() => {
+      const d = allDanmaku[idx % allDanmaku.length];
+      idx++;
+      sendDanmaku(d);
+    }, i * 250);
+  }
+
+  danmakuTimer = setInterval(() => {
+    if (document.hidden) return;
+    const d = allDanmaku[idx % allDanmaku.length];
+    idx++;
+    sendDanmaku(d);
+  }, 1500);
+}
+
+// ══════════════════════════════════════════
+// AUDIO
+// ══════════════════════════════════════════
+let audioCtx = null;
+function getCtx() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+function playNote(freq, dur, delay = 0, type = 'sine', vol = 0.12) {
+  try {
+    const ctx = getCtx();
+    const t = ctx.currentTime + delay;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = type; osc.frequency.value = freq;
+    gain.gain.setValueAtTime(vol, t);
+    gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.start(t); osc.stop(t + dur);
+  } catch(e) {}
+}
+function playOpenSound() {
+  [523, 659, 784, 1047].forEach((f, i) => playNote(f, 0.22, i * 0.1, 'sine'));
+}
+function playFanfare() {
+  [523, 659, 784, 1047, 784, 1047, 1319, 1568].forEach((f, i) => playNote(f, 0.2, i * 0.1, 'triangle', 0.1));
+}
+
+// ══════════════════════════════════════════
+// BG ELEMENTS
+// ══════════════════════════════════════════
+function createBgElements() {
+  const c = document.getElementById('bgElements');
+  const balloons = ['🎈','🎈','🎈','🎈','🎈'];
+  const stars = ['⭐','✨','🌟','💫','⭐','✨','🌟'];
+  const clouds = ['☁️','☁️','☁️'];
+  function spawn(cls, arr) {
+    const s = document.createElement('span');
+    s.className = cls;
+    s.textContent = arr[Math.floor(Math.random() * arr.length)];
+    s.style.left = Math.random() * 100 + '%';
+    s.style.animationDuration = (8 + Math.random() * 14) + 's';
+    s.style.animationDelay = Math.random() * 12 + 's';
+    s.style.fontSize = (1.5 + Math.random() * 1.8) + 'rem';
+    c.appendChild(s);
+    s.addEventListener('animationend', () => { s.remove(); spawn(cls, arr); });
+  }
+  for (let i = 0; i < 8; i++) spawn('balloon', balloons);
+  for (let i = 0; i < 10; i++) spawn('star', stars);
+  for (let i = 0; i < 5; i++) spawn('cloud', clouds);
+}
+
+// ══════════════════════════════════════════
+// RIBBON BURST
+// ══════════════════════════════════════════
+function spawnRibbonBurst(cx, cy) {
+  const ribbonColors = [
+    '#ff6b6b','#feca57','#48dbfb','#ff9ff3','#a29bfe',
+    '#00d2d3','#ffa502','#2ed573','#70a1ff','#ff4757',
+    '#ffc312','#1e90ff','#ff6348','#7bed9f','#e056a0',
+  ];
+  const $r = document.getElementById('ribbonContainer');
+  for (let i = 0; i < 50; i++) {
+    const angle = (360 / 50) * i + (Math.random() - 0.5) * 18;
+    const rad = (angle * Math.PI) / 180;
+    const dist = 100 + Math.random() * 160;
+    const ribbon = document.createElement('div');
+    ribbon.className = 'ribbon';
+    ribbon.style.left = cx + 'px'; ribbon.style.top = cy + 'px';
+    ribbon.style.background = ribbonColors[Math.floor(Math.random() * ribbonColors.length)];
+    ribbon.style.setProperty('--angle', angle + 'deg');
+    ribbon.style.setProperty('--a', rad);
+    ribbon.style.setProperty('--dist', dist + 'px');
+    ribbon.style.animationDelay = Math.random() * 0.12 + 's';
+    $r.appendChild(ribbon);
+    ribbon.addEventListener('animationend', () => ribbon.remove());
+  }
+  const emojis = ['🎉','🎊','✨','🌟','💫','⭐','🎀','💖','🎪','🎠','🎁','🎈'];
+  for (let i = 0; i < 20; i++) {
+    const star = document.createElement('span');
+    star.className = 'ribbon-star';
+    star.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    star.style.left = cx + 'px'; star.style.top = cy + 'px';
+    const a = Math.random() * Math.PI * 2;
+    star.style.setProperty('--sx', Math.cos(a) * 50 + 'px');
+    star.style.setProperty('--sy', Math.sin(a) * 50 - 25 + 'px');
+    star.style.setProperty('--ex', Math.cos(a) * 150 + 'px');
+    star.style.setProperty('--ey', Math.sin(a) * 150 - 40 + 'px');
+    star.style.animationDelay = Math.random() * 0.15 + 's';
+    $r.appendChild(star);
+    star.addEventListener('animationend', () => star.remove());
+  }
+}
+
+// ══════════════════════════════════════════
+// CONFETTI
+// ══════════════════════════════════════════
+function spawnConfetti() {
+  const $c = document.getElementById('confettiContainer');
+  const colors = ['#ff6b6b','#feca57','#48dbfb','#ff9ff3','#a29bfe',
+                  '#00d2d3','#ff6348','#7bed9f','#70a1ff','#ffa502',
+                  '#2ed573','#ff4757','#1e90ff','#ffc312'];
+  const shapes = ['●','■','▲','★','♦','❤','🎉','🎊','✨','🌟'];
+  for (let i = 0; i < 90; i++) {
+    const p = document.createElement('span');
+    p.className = 'confetti-piece';
+    p.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+    p.style.left = Math.random() * 100 + '%';
+    p.style.color = colors[Math.floor(Math.random() * colors.length)];
+    p.style.fontSize = (7 + Math.random() * 14) + 'px';
+    p.style.animationDuration = (2 + Math.random() * 3) + 's';
+    p.style.animationDelay = Math.random() * 0.6 + 's';
+    $c.appendChild(p);
+    p.addEventListener('animationend', () => p.remove());
+  }
+}
+
+// ══════════════════════════════════════════
+// MAIN PAGE STATE & LOGIC
+// ══════════════════════════════════════════
+let drawCount = 0;
+let initialized = false;
+let isAnimating = false;
+let musicPlaying = false;
+const MAX_DRAWS = 2;
+
+// DOM
+let $giftBoxWrapper, $giftBox, $giftResult, $giftCard, $giftIcon, $giftName, $giftBlessing;
+let $giftHint, $drawBadge1, $drawBadge2, $postDrawPrompt;
+let $historySection, $historyList, $endingOverlay, $endingClose;
+let $blessingsOverlay, $blessingsClose, $blessingsList;
+
+function cacheDom() {
+  $giftBoxWrapper = document.getElementById('giftBoxWrapper');
+  $giftBox = document.getElementById('giftBox');
+  $giftResult = document.getElementById('giftResult');
+  $giftCard = document.getElementById('giftCard');
+  $giftIcon = document.getElementById('giftIcon');
+  $giftName = document.getElementById('giftName');
+  $giftBlessing = document.getElementById('giftBlessing');
+  $giftHint = document.getElementById('giftHint');
+  $drawBadge1 = document.getElementById('drawBadge1');
+  $drawBadge2 = document.getElementById('drawBadge2');
+  $postDrawPrompt = document.getElementById('postDrawPrompt');
+  $historySection = document.getElementById('historySection');
+  $historyList = document.getElementById('historyList');
+  $endingOverlay = document.getElementById('endingOverlay');
+  $endingClose = document.getElementById('endingClose');
+  $blessingsOverlay = document.getElementById('blessingsOverlay');
+  $blessingsClose = document.getElementById('blessingsClose');
+  $blessingsList = document.getElementById('blessingsList');
+}
+
+function updateDrawBadges() {
+  if (drawCount >= 1) {
+    $drawBadge1.classList.add('used');
+    $drawBadge1.innerHTML = '✅ 第 1 次：已抽';
+  }
+  if (drawCount >= 2) {
+    $drawBadge2.classList.add('used');
+    $drawBadge2.innerHTML = '✅ 第 2 次：已抽';
+  }
+}
+
+function showEnding() {
+  $endingOverlay.classList.add('show');
+}
+
+function hideEnding() {
+  $endingOverlay.classList.remove('show');
+}
+
+// ── Blessings Wall ──
+function showBlessings() {
+  const saved = getSavedDanmaku();
+  if (saved.length === 0) {
+    $blessingsList.innerHTML = '<p style="color:#999;text-align:center;">还没有人送出祝福，来做第一个吧！💌</p>';
+  } else {
+    $blessingsList.innerHTML = saved.map((d, i) => {
+      const text = d.replace(/^💬 /, '');
+      return '<div class="blessings-item" style="animation-delay:' + (i * 0.03) + 's">' +
+        text +
+        '<div class="bless-time">#' + (saved.length - i) + '</div>' +
+        '</div>';
+    }).join('');
+    $blessingsList.scrollTop = 0;
+  }
+  $blessingsOverlay.classList.add('show');
+}
+
+function hideBlessings() {
+  $blessingsOverlay.classList.remove('show');
+}
+
+function openGift() {
+  if (isAnimating || drawCount >= MAX_DRAWS) return;
+  isAnimating = true;
+
+  const gift = GIFTS[drawCount]; // 0 → ceramic pony, 1 → wangzai milk
+  playOpenSound();
+
+  // Open box
+  $giftBox.classList.add('opening');
+  $giftHint.style.display = 'none';
+
+  // Show card
+  setTimeout(() => {
+    $giftResult.classList.add('show');
+    $giftIcon.textContent = gift.icon;
+    $giftName.textContent = gift.name;
+    $giftBlessing.textContent = gift.blessing;
+    $giftCard.classList.remove('flipped');
+  }, 400);
+
+  // Flip card
+  setTimeout(() => {
+    $giftCard.classList.add('flipped');
+
+    const boxRect = $giftBox.getBoundingClientRect();
+    spawnRibbonBurst(boxRect.left + boxRect.width / 2, boxRect.top + boxRect.height / 2);
+    spawnConfetti();
+    playFanfare();
+
+    // Danmaku
+    sendDanmaku(`🎁 ${gift.icon} 抽到了${gift.name}！`, '#e65100');
+    if (drawCount === 0) {
+      sendDanmaku('🐴 马上快乐！马上有钱！', '#d63031');
+    } else {
+      sendDanmaku('🥛 小孩儿都喜欢！旺仔牛奶~', '#d63031');
+    }
+
+    drawCount++;
+    updateDrawBadges();
+
+    // Update history
+    $historySection.style.display = '';
+    const item = document.createElement('span');
+    item.className = 'history-item';
+    item.textContent = gift.icon + ' ' + gift.name;
+    $historyList.appendChild(item);
+
+    // Post-draw flow: prompt after card is visible
+    setTimeout(() => {
+      isAnimating = false;
+      if (drawCount === 1) {
+        $postDrawPrompt.style.display = '';
+        $postDrawPrompt.innerHTML = '🎀 还有<strong>一次</strong>抽奖机会哦！<br><button class="btn btn-primary" id="btnDrawAgain" style="margin-top:10px;">🎲 再抽一次</button>';
+        // Keep card visible, don't reset box
+      } else if (drawCount === 2) {
+        $postDrawPrompt.style.display = '';
+        $postDrawPrompt.innerHTML = '💌 两次抽奖都用完啦！<br><strong>写下你对大家的六一祝福叭！！</strong>';
+        $giftBoxWrapper.classList.add('disabled');
+        $giftHint.style.display = 'none';
+        document.getElementById('blessingInput').focus();
+        window._readyForEnding = true;
+      }
+    }, 2000);
+  }, 700);
+}
+
+function resetBox() {
+  $giftBox.classList.remove('opening');
+  $giftResult.classList.remove('show');
+  $giftCard.classList.remove('flipped');
+  $giftHint.style.display = '';
+}
+
+// ══════════════════════════════════════════
+// EVENT BINDINGS
+// ══════════════════════════════════════════
+function bindEvents() {
+  // Gift box
+  $giftBoxWrapper.addEventListener('click', () => {
+    if ($giftBox.classList.contains('opening') || $giftBoxWrapper.classList.contains('disabled')) {
+      // Do nothing if opening or disabled
+    } else {
+      openGift();
+    }
+  });
+
+  // Delegated: "再抽一次" button (dynamically created after first draw)
+  $postDrawPrompt.addEventListener('click', (e) => {
+    if (e.target.id === 'btnDrawAgain' || e.target.closest('#btnDrawAgain')) {
+      $postDrawPrompt.style.display = 'none';
+      resetBox();
+    }
+  });
+
+  // Buttons
+  document.getElementById('btnDraw').addEventListener('click', () => {
+    if (drawCount >= MAX_DRAWS) return;
+    $postDrawPrompt.style.display = 'none';
+    resetBox();
+    setTimeout(openGift, 100);
+  });
+  document.getElementById('btnReset').addEventListener('click', () => {
+    resetBox();
+    $giftBoxWrapper.classList.remove('disabled');
+    $giftHint.style.display = '';
+    $postDrawPrompt.style.display = 'none';
+    isAnimating = false;
+  });
+  document.getElementById('btnShare').addEventListener('click', () => {
+    const shareUrl = generateShareUrl();
+    const text = '🎈 六一儿童节快乐！点击链接来童心礼物商店抽礼物吧！🐴🥛\n' + shareUrl;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => {
+        sendDanmaku('📋 分享链接已复制！发给朋友，让他们也看到大家的祝福~');
+      });
+    } else {
+      sendDanmaku('🎈 六一儿童节快乐！🐴🥛');
+    }
+  });
+
+  // Ending overlay
+  $endingClose.addEventListener('click', hideEnding);
+  $endingOverlay.addEventListener('click', (e) => {
+    if (e.target === $endingOverlay) hideEnding();
+  });
+
+  // Blessings wall
+  document.getElementById('btnBlessings').addEventListener('click', showBlessings);
+  $blessingsClose.addEventListener('click', hideBlessings);
+  $blessingsOverlay.addEventListener('click', (e) => {
+    if (e.target === $blessingsOverlay) hideBlessings();
+  });
+
+  // Blessing form
+  document.getElementById('blessingForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const input = document.getElementById('blessingInput');
+    const text = input.value.trim();
+    if (!text) return;
+    sendDanmaku('💬 ' + text);
+    saveDanmaku('💬 ' + text);
+    input.value = '';
+
+    // If both draws done and blessing submitted, show ending
+    if (drawCount >= MAX_DRAWS && window._readyForEnding) {
+      window._readyForEnding = false;
+      setTimeout(showEnding, 800);
+    }
+  });
+
+  // Music toggle
+  document.getElementById('musicToggle').addEventListener('click', () => {
+    musicPlaying = !musicPlaying;
+    document.getElementById('musicToggle').textContent = musicPlaying ? '🔊' : '🔇';
+    if (musicPlaying) {
+      [523, 659, 784, 1047, 784, 1047].forEach((f, i) => playNote(f, 0.35, i * 0.2, 'triangle'));
+      sendDanmaku('🎵 音乐响起，快乐加倍！');
+    }
+  });
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', (e) => {
+    if (e.key === ' ' || e.code === 'Space') {
+      if (document.activeElement === document.getElementById('blessingInput')) return;
+      e.preventDefault();
+      if (drawCount < MAX_DRAWS && !isAnimating) openGift();
+    }
+    if (e.key === 'Escape') {
+      hideEnding();
+      hideBlessings();
+    }
+  });
+}
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+function initMain() {
+  if (initialized) return;
+  initialized = true;
+  cacheDom();
+  bindEvents();
+  loadDanmakuFromUrl(); // Load danmaku from shared URL hash
+  createBgElements();
+  startAutoDanmaku();
+  // Update URL hash silently so people can copy the link anytime
+  updateUrlHash();
+}
+
+// Keep the page URL hash in sync with danmaku for easy sharing
+function updateUrlHash() {
+  try {
+    const saved = getSavedDanmaku();
+    if (saved.length === 0) return;
+    const encoded = encodeDanmakuForUrl(saved);
+    const base = window.location.href.split('#')[0];
+    history.replaceState(null, '', base + '#d=' + encoded);
+  } catch(e) {}
+}
+
+// On page load, if story is somehow skipped (e.g. page refresh), init directly
+// But normally story overlay handles this
+window.addEventListener('load', () => {
+  // Pre-initialize audio context on first user interaction
+  document.addEventListener('click', function initAudio() {
+    getCtx();
+  }, { once: true });
+});
+
+console.log('🐴🎈 童心礼物商店 —— 每个大人都曾是小孩 🎈🐴');
+</script>
+</body>
+</html>
